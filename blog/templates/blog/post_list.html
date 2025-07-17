@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post List</title>
+</head>
+
+<body>
+    <h1>Publicaciones</h1>
+    {% for post in posts %}
+        <article>
+            <h2>{{post.titulo}}</h2>
+            <p><em>por {{post.autor}} el {{post.fecha_publicacion}}</em></p>
+            <p>{{post.contenido}}</p>
+        </article>
+        <a href="{% url 'post_detail' post.pk %}">
+            - Ver Detalles
+    
+        </a>
+    {% empty %}
+        <p>No hay publicaciones disponibles.</p>
+    {% endfor %}
+
+
+</body>
+
+</html>
