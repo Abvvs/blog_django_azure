@@ -1,28 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Post List</title>
-</head>
+{% extends "blog/base.html" %}
+{% block title %} INICIO {% endblock title %} 
 
-<body>
-    <h1>Publicaciones</h1>
-    {% for post in posts %}
-        <article>
-            <h2>{{post.titulo}}</h2>
-            <p><em>por {{post.autor}} el {{post.fecha_publicacion}}</em></p>
-            <p>{{post.contenido}}</p>
-        </article>
-        <a href="{% url 'post_detail' post.pk %}">
-            - Ver Detalles
-    
-        </a>
-    {% empty %}
-        <p>No hay publicaciones disponibles.</p>
-    {% endfor %}
-
-
-</body>
-
-</html>
+{% block content %}
+<h1 class="mb-4"> Publicaciones </h1>
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title"> {{post.titulo}} </h5>
+        <p class="card-text">{{post.contenido | truncatechars:200}}</p>
+        <p class="card-text"><small class="text-muted">por {{post.autor}} el {{post.fecha_publicacion}} </small></p>
+        <a href="{% url 'post_detail' post.pk %}" class="btn btn-primary"> Leer más </a>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
